@@ -3,6 +3,7 @@ import { Card, Table } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import doctorImg from "../../assets/imgs/doctor-3.jpg";
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
+import Paginationcom from "./paginationcom";
 const AppointmentList = () => {
   const Categories = [
     "ID",
@@ -219,6 +220,9 @@ const AppointmentList = () => {
                 ))}
               </tbody>
             </Table>
+          </div>
+            <div>
+            <Paginationcom />
           </div>
         </Card>
       </div>

@@ -3,13 +3,13 @@ import { Card, Table } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import doctorImg from "../../assets/imgs/doctor-3.jpg";
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
+import Paginationcom from "./paginationcom";
 const AppointmentList = () => {
   const Categories = [
     "ID",
     "Patient Name",
     "Age",
-    "Doctor Name",
-    "Department",
+
     "Date",
     "Time",
     "Disease",
@@ -20,8 +20,7 @@ const AppointmentList = () => {
       id: 1,
       name: "ahmed",
       age: "22",
-      doctorName: "Zeko",
-      department: "Dentist",
+
       date: "11 Dec 2020",
       time: "10:00am-12:00am",
       disease: "cold",
@@ -31,8 +30,7 @@ const AppointmentList = () => {
       id: 2,
       name: "ahmed",
       age: "22",
-      doctorName: "Zeko",
-      department: "Dentist",
+
       date: "11 Dec 2020",
       time: "10:00am-12:00am",
       disease: "cold",
@@ -42,8 +40,7 @@ const AppointmentList = () => {
       id: 3,
       name: "ahmed",
       age: "22",
-      doctorName: "Zeko",
-      department: "Dentist",
+
       date: "11 Dec 2020",
       time: "10:00am-12:00am",
       disease: "cold",
@@ -53,8 +50,7 @@ const AppointmentList = () => {
       id: 4,
       name: "ahmed",
       age: "22",
-      doctorName: "Zeko",
-      department: "Dentist",
+
       date: "11 Dec 2020",
       time: "10:00am-12:00am",
       disease: "cold",
@@ -64,8 +60,7 @@ const AppointmentList = () => {
       id: 5,
       name: "ahmed",
       age: "22",
-      doctorName: "Zeko",
-      department: "Dentist",
+
       date: "11 Dec 2020",
       time: "10:00am-12:00am",
       disease: "cold",
@@ -75,8 +70,7 @@ const AppointmentList = () => {
       id: 6,
       name: "ahmed",
       age: "22",
-      doctorName: "Zeko",
-      department: "Dentist",
+
       date: "11 Dec 2020",
       time: "10:00am-12:00am",
       disease: "cold",
@@ -86,8 +80,7 @@ const AppointmentList = () => {
       id: 7,
       name: "ahmed",
       age: "22",
-      doctorName: "Zeko",
-      department: "Dentist",
+
       date: "11 Dec 2020",
       time: "10:00am-12:00am",
       disease: "cold",
@@ -97,8 +90,7 @@ const AppointmentList = () => {
       id: 8,
       name: "ahmed",
       age: "22",
-      doctorName: "Zeko",
-      department: "Dentist",
+
       date: "11 Dec 2020",
       time: "10:00am-12:00am",
       disease: "cold",
@@ -108,8 +100,7 @@ const AppointmentList = () => {
       id: 9,
       name: "ahmed",
       age: "22",
-      doctorName: "Zeko",
-      department: "Dentist",
+
       date: "11 Dec 2020",
       time: "10:00am-12:00am",
       disease: "cold",
@@ -119,8 +110,7 @@ const AppointmentList = () => {
       id: 10,
       name: "ahmed",
       age: "22",
-      doctorName: "Zeko",
-      department: "Dentist",
+
       date: "11 Dec 2020",
       time: "10:00am-12:00am",
       disease: "cold",
@@ -188,8 +178,7 @@ const AppointmentList = () => {
                       </div>
                     </td>
                     <td style={{ fontSize: "14px" }}>{e.age}</td>
-                    <td style={{ fontSize: "14px" }}>{e.doctorName}</td>
-                    <td style={{ fontSize: "14px" }}>{e.department}</td>
+
                     <td style={{ fontSize: "14px" }}>{e.date}</td>
                     <td style={{ fontSize: "14px" }}>{e.time}</td>
                     <td style={{ fontSize: "14px" }}>{e.disease}</td>
@@ -219,6 +208,9 @@ const AppointmentList = () => {
                 ))}
               </tbody>
             </Table>
+          </div>
+          <div>
+            <Paginationcom />
           </div>
         </Card>
       </div>

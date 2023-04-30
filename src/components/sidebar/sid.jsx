@@ -11,7 +11,7 @@ import Navbare from "./../navbare/Navbare";
 import AppointmentList from "./../views/AppointmentList";
 
 const Sidbar = () => {
-  const [isOpen, setisOpen] = useState(false);
+  const [isOpen, setisOpen] = useState(true);
   const toggle = () => setisOpen(!isOpen);
   return (
     <BrowserRouter>

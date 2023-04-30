@@ -209,3 +209,9 @@ form.sinup-form {
 .formm {
   display: block !important;
 }
+
+.dpco {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import Paginationcom from "./paginationcom";
-import { Container } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const Patiant_list = () => {
   const PationData = [
@@ -90,40 +90,58 @@ const Patiant_list = () => {
   const dataKey = ["Name", "Address", "Disease", "Age", "Phone", "E-mail"];
   return (
     <>
-      <Container className="ms-panel">
-        <div className="ms-panel-header ms-panel-custome">
-          <h5>PATIENT LIST</h5>
-        </div>
+      <div
+        className="w-100 py-5"
+        style={{
+          backgroundColor: "#f1f5fc",
+          padding: "15px",
+        }}
+      >
+        <Card className="w-100" style={{ overflowX: "auto" }}>
+          <div
+            className="d-flex align-items-center justify-content-between"
+            style={{
+              borderBottom: "1px solid rgba(0, 0, 0, .1)",
+            }}
+          >
+            <h5 className="p-3">PATIENT LIST</h5>
+          </div>
 
-        <div className="ms-panel-body">
-          <Table responsive>
-            <thead>
-              <tr>
-                <th>#</th>
-                {dataKey.map((e, index) => (
-                  <th key={index}>{e}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {PationData.map((e, index) => (
-                <tr key={index}>
-                  <td>{e.id}</td>
-                  <td>{e.name}</td>
-                  <td>{e.address}</td>
-                  <td>{e.disease}</td>
-                  <td>{e.age}</td>
-                  <td>{e.phone}</td>
-                  <td>{e.email}</td>
+          <div className="ms-panel-body">
+            <Table
+              className="table-padding"
+              striped
+              style={{ borderRadius: "50px" }}
+              responsive
+            >
+              <thead style={{ backgroundColor: "#009efb" }}>
+                <tr style={{ position: "relative" }}>
+                  <th style={{ fontWeight: "500", color: "#fff" }}>ID</th>
+                  {dataKey.map((e, index) => (
+                    <th key={index}>{e}</th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
-        <div>
-          <Paginationcom />
-        </div>
-      </Container>
+              </thead>
+              <tbody>
+                {PationData.map((e, index) => (
+                  <tr key={index}>
+                    <td>{e.id}</td>
+                    <td>{e.name}</td>
+                    <td>{e.address}</td>
+                    <td>{e.disease}</td>
+                    <td>{e.age}</td>
+                    <td>{e.phone}</td>
+                    <td>{e.email}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+          <div>
+            <Paginationcom />
+          </div>
+        </Card>
+      </div>
     </>
   );
 };

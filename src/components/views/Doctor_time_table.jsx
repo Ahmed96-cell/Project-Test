@@ -3,23 +3,82 @@ import { GrFormSchedule } from "react-icons/gr";
 import Card from "react-bootstrap/Card";
 import { Button, Col, Container, Row, Form } from "react-bootstrap";
 import "../../index.css";
-import doctorImg from "../../assets/imgs/doctor-3.jpg";
-import "../../index.css";
 
 const Doctor_time_table = () => {
-  const docdata = {
-    id: 0,
-    name: "ahmed yahia",
-    department: "dentist",
-    date: "",
-    startTime: "",
-    endTime: "",
-  };
+  const [docdata, setdocdata] = useState([
+    {
+      id: 0,
+      name: "ahmed yahia",
+      department: "dentist",
+      date: "",
+      days: [
+        {
+          active: false,
+          day: "Saturday",
+        },
+        {
+          active: false,
+          day: "Sunday",
+        },
+        {
+          active: false,
+          day: "Monday",
+        },
+        {
+          active: false,
+          day: "Tuesday",
+        },
+        {
+          active: false,
+          day: "Wednesday",
+        },
+        {
+          active: false,
+          day: "Thursday",
+        },
+        {
+          active: false,
+          day: "Friday",
+        },
+      ],
+      startTime: "",
+      endTime: "",
+    },
+  ]);
+  // const days = [
+  //   "Monday",
+  //   "Tuesday",
+  //   "Wednesday",
+  //   "Thursday",
+  //   "Friday",
+  //   "Saturday",
+  //   "Sunday",
+  // ];
   const onsub = (e) => {
     e.preventDefault();
   };
-  const reset = () => {};
-  const onchange = () => {};
+
+  const [checked, setchecked] = useState(true);
+
+  const handleChange = (e) => {
+    //clone
+    const alldata = [...docdata];
+    const hamoda = [...alldata[0].days];
+    //change
+    const i = hamoda.findIndex((s) => s.day === e.day);
+    // console.log(i);
+    hamoda[i] = { ...hamoda[i], active: !hamoda[i].active };
+    alldata[0] = { ...alldata[0], days: hamoda };
+    //setstate
+    setdocdata(alldata);
+    // setchecked(!checked);
+    // setdocdata(!docdata[0].days[0].active);
+  };
+
+  const handleSubmit = () => {
+    handleSubmit.bind();
+  };
+
   return (
     <>
       <Container
@@ -27,118 +86,231 @@ const Doctor_time_table = () => {
           backgroundColor: "#f1f5fc",
         }}
       >
-        {/* <div className="w-100">
-          <div className="w-100 d-flex flex-wrap">
-            {doctors.map((e, i) => (
-              <Col key={i} lg={4} md={4} sm={6} className="px-3">
-                <Card style={{ marginBottom: "2rem" }}>
-                  <div className="d-flex p-3" style={{ position: "relative" }}>
-                    <div className="mb-3 w-100">
-                      <div className="d-flex align-items-center">
-                        <img
-                          src={doctorImg}
-                          alt=""
-                          width="50px"
-                          height="50px"
-                          style={{ borderRadius: "50%", marginRight: "8px" }}
-                        />
-                        <div className="content w-100">
-                          <h6
-                            style={{
-                              fontWeight: "500",
-                              fontSize: "13px",
-                              margin: "0",
-                            }}
-                          >
-                            {e.name}
-                          </h6>
-                          <p
-                            className="my-1"
-                            style={{
-                              fontSize: "12px",
-                              color: "#878793",
-                            }}
-                          >
-                            {e.jopTitle}
-                          </p>
-                          <p
-                            className="mt-2 d-flex align-items-center"
-                            style={{
-                              fontWeight: "500",
-                              fontSize: "13px",
-                              margin: "0",
-                            }}
-                          >
-                            <GrFormSchedule style={{ fontSize: "12px" }} />
-                            {e.date}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              </Col>
-            ))}
-          </div>
-        </div> */}
         <div>
           <h1>ADD SCHEDULE</h1>
           <Form onSubmit={onsub} className="formm">
             <Row className="col-12  mb-3">
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Doctor Name</Form.Label>
-                <Form.Control disabled type="text" value={docdata.name} />
+                <Form.Control disabled type="text" value={docdata[0].name} />
               </Form.Group>
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Doctor Department</Form.Label>
-                <Form.Control disabled type="text" value={docdata.department} />
+                <Form.Control
+                  disabled
+                  type="text"
+                  value={docdata[0].department}
+                />
               </Form.Group>
             </Row>
-            <Row className="col-12  mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Available Date</Form.Label>
-                <Form.Control type="date" />
+            {docdata[0].days.map((e, i) => (
+              <Row key={i} className="col-12  mb-3">
+                {/* {console.log(e)} */}
+                <Form.Group
+                  size="lg"
+                  className=" d-flex align-items-center align-self-center"
+                  as={Col}
+                  controlId="formGridEmail"
+                >
+                  <Form.Check
+                    style={{
+                      paddingLeft: "10.5em",
+                      marginBottom: "-0.875rem",
+                    }}
+                    label={e.day}
+                    onChange={() => handleChange(e)}
+                    type="switch"
+                    id={`custom-switch + ${e.day}`}
+                    name="hamoda"
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridEmail">
+                  <Form.Label>Start time</Form.Label>
+                  {e.active ? (
+                    <Form.Control name="hamoda" type="time" />
+                  ) : (
+                    <Form.Control type="time" disabled />
+                  )}
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridEmail">
+                  <Form.Label>End time</Form.Label>
+                  {e.active ? (
+                    <Form.Control type="time" />
+                  ) : (
+                    <Form.Control type="time" disabled />
+                  )}
+                </Form.Group>
+              </Row>
+            ))}
+
+            {/*  <Row className="col-12  mb-3">
+              <Form.Group
+                size="lg"
+                className=" d-flex align-items-center align-self-center"
+                as={Col}
+                controlId="formGridEmail"
+              >
+                <Form.Check
+                  style={{
+                    paddingLeft: "10.5em",
+                    marginBottom: "-0.875rem",
+                  }}
+                  type="switch"
+                  id="custom-switch2"
+                  label="Sunday"
+                />
               </Form.Group>
+
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Start time</Form.Label>
-                <Form.Control type="time" />
+                <Form.Control disabled type="time" />
               </Form.Group>
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>End time</Form.Label>
                 <Form.Control type="time" />
               </Form.Group>
             </Row>
-            <Row>
-              <fieldset>
-                <Form.Group as={Row} className="mb-3">
-                  <Form.Label as="legend" column sm={4}>
-                    state
-                  </Form.Label>
-                  <Col sm={10}>
-                    <Form.Check
-                      type="radio"
-                      label=" Inactive"
-                      name="formHorizontalRadios"
-                      id="formHorizontalRadios2"
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="Active"
-                      name="formHorizontalRadios"
-                      id="formHorizontalRadios3"
-                    />
-                  </Col>
-                </Form.Group>
-              </fieldset>
+            <Row className="col-12  mb-3">
+              <Form.Group
+                size="lg"
+                className=" d-flex align-items-center align-self-center"
+                as={Col}
+                controlId="formGridEmail"
+              >
+                <Form.Check
+                  style={{
+                    paddingLeft: "10.5em",
+                    marginBottom: "-0.875rem",
+                  }}
+                  type="switch"
+                  id="custom-switch3"
+                  label="Monday"
+                />
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Start time</Form.Label>
+                <Form.Control disabled type="time" />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>End time</Form.Label>
+                <Form.Control type="time" />
+              </Form.Group>
             </Row>
+            <Row className="col-12  mb-3">
+              <Form.Group
+                size="lg"
+                className=" d-flex align-items-center align-self-center"
+                as={Col}
+                controlId="formGridEmail"
+              >
+                <Form.Check
+                  style={{
+                    paddingLeft: "10.5em",
+                    marginBottom: "-0.875rem",
+                  }}
+                  type="switch"
+                  id="custom-switch4"
+                  label="Tuesday"
+                />
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Start time</Form.Label>
+                <Form.Control disabled type="time" />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>End time</Form.Label>
+                <Form.Control type="time" />
+              </Form.Group>
+            </Row>
+            <Row className="col-12  mb-3">
+              <Form.Group
+                size="lg"
+                className=" d-flex align-items-center align-self-center"
+                as={Col}
+                controlId="formGridEmail"
+              >
+                <Form.Check
+                  style={{
+                    paddingLeft: "10.5em",
+                    marginBottom: "-0.875rem",
+                  }}
+                  type="switch"
+                  id="custom-switch5"
+                  label="Wednesday"
+                />
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Start time</Form.Label>
+                <Form.Control disabled type="time" />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>End time</Form.Label>
+                <Form.Control type="time" />
+              </Form.Group>
+            </Row>
+            <Row className="col-12  mb-3">
+              <Form.Group
+                size="lg"
+                className=" d-flex align-items-center align-self-center"
+                as={Col}
+                controlId="formGridEmail"
+              >
+                <Form.Check
+                  style={{
+                    paddingLeft: "10.5em",
+                    marginBottom: "-0.875rem",
+                  }}
+                  type="switch"
+                  id="custom-switch6"
+                  label="Thursday"
+                />
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Start time</Form.Label>
+                <Form.Control disabled type="time" />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>End time</Form.Label>
+                <Form.Control type="time" />
+              </Form.Group>
+            </Row>
+            <Row className="col-12  mb-3">
+              <Form.Group
+                size="lg"
+                className=" d-flex align-items-center align-self-center"
+                as={Col}
+                controlId="formGridEmail"
+              >
+                <Form.Check
+                  style={{
+                    paddingLeft: "10.5em",
+                    marginBottom: "-0.875rem",
+                  }}
+                  type="switch"
+                  id="custom-switch7"
+                  label="Friday"
+                />
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Start time</Form.Label>
+                <Form.Control disabled type="time" />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>End time</Form.Label>
+                <Form.Control type="time" />
+              </Form.Group>
+            </Row> */}
             <Row
               className="col-6
               mb-3"
             >
               <Form.Group as={Col}>
-                <Button className="mb-9" variant="warning">
-                  Reset
-                </Button>
                 <Button className="mb" variant="primary" type="submit">
                   Save
                 </Button>
@@ -147,6 +319,7 @@ const Doctor_time_table = () => {
           </Form>
         </div>
       </Container>
+      ;
     </>
   );
 };
